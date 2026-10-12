@@ -1,0 +1,16 @@
+node_modules
+.next
+.git
+.env*
+!.env.example
+e2e
+tests
+test-results
+playwright-report
+coverage
+*.log
+*.tsbuildinfo
+.agents
+.codex
+.cursor
+.vscode

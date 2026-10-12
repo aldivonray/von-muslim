@@ -25,6 +25,20 @@ npm start
 
 Apply migrations once per release. `MIGRATION_DATABASE_URL` takes precedence only for migration/Drizzle tooling; the app uses `DATABASE_URL`. Use a role with schema permissions for migrations and the permissions needed by your application at runtime. Auth migrations contain `public` tables and a Drizzle migration-history schema.
 
+## Deploy ke server (Docker Compose)
+
+`compose.prod.yaml` menjalankan PostgreSQL, migrasi sekali jalan, lalu aplikasi. Di server yang sudah punya Docker:
+
+```sh
+git clone https://github.com/aldivonray/von-muslim.git && cd von-muslim
+cp .env.production.example .env   # isi POSTGRES_PASSWORD, BETTER_AUTH_SECRET, BETTER_AUTH_URL
+docker compose -f compose.prod.yaml up -d --build
+```
+
+Isi secret dengan `openssl rand -hex 32`. `BETTER_AUTH_URL` harus sama persis dengan alamat yang dibuka di browser (mis. `https://domain-anda.com`). Pasang reverse proxy (Caddy atau Nginx) untuk HTTPS dan teruskan ke `APP_PORT`.
+
+Update rilis: `git pull && docker compose -f compose.prod.yaml up -d --build`. Migrasi berjalan otomatis sebelum app baru start. Data ada di volume `postgres-data`; jangan jalankan `down -v`. Backup: `docker compose -f compose.prod.yaml exec postgres pg_dump -U vonmuslim vonmuslim > backup.sql`.
+
 ## Docker image
 
 `Dockerfile` builds two targets from one `next build`. The default `runner` target ships `.next/standalone`: a minimal server, the traced runtime files, and nothing else. The `migrator` target adds `drizzle-orm` and the committed SQL so a release can migrate before the new app starts.
