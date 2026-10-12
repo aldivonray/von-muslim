@@ -1,0 +1,156 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--secondary);
+  --color-accent-foreground: var(--foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--border);
+  --color-ring: var(--primary);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-deep: var(--deep);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --font-arabic: var(--font-amiri), "Amiri", "Noto Naskh Arabic", serif;
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: #f8f5ee;
+  --foreground: #13241d;
+  --card: #fffdf9;
+  --card-foreground: #13241d;
+  --primary: #0b6b4f;
+  --primary-foreground: #ffffff;
+  --secondary: #efe9dc;
+  --muted: #f2ede2;
+  --muted-foreground: #5b6860;
+  --border: #e6dfcf;
+  --destructive: #b91c1c;
+  --gold: #a87a22;
+  --gold-soft: #f1dfae;
+  --deep: #06382a;
+}
+
+.dark {
+  --background: #0d1714;
+  --foreground: #f1efe8;
+  --card: #14211d;
+  --card-foreground: #f1efe8;
+  --primary: #4fd1a5;
+  --primary-foreground: #06281d;
+  --secondary: #1d2d28;
+  --muted: #18261f;
+  --muted-foreground: #a9b5ae;
+  --border: #2a3a34;
+  --destructive: #ff8a8a;
+  --gold: #e3bd62;
+  --gold-soft: #f1dfae;
+  --deep: #041f18;
+}
+
+/* Emerald gradient used by every page banner and the footer. */
+@utility surface-hero {
+  background-color: var(--deep);
+  background-image:
+    radial-gradient(circle at 85% 10%, rgb(227 189 98 / 0.28), transparent 42%),
+    radial-gradient(circle at 0% 100%, rgb(79 209 165 / 0.22), transparent 45%),
+    linear-gradient(135deg, #0d7556 0%, #06382a 70%);
+}
+
+/* Eight-point star lattice; white strokes for dark surfaces. */
+@utility bg-pattern-light {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.1'%3E%3Crect x='18' y='18' width='28' height='28'/%3E%3Crect x='18' y='18' width='28' height='28' transform='rotate(45 32 32)'/%3E%3Ccircle cx='32' cy='32' r='6'/%3E%3Cpath d='M0 0l12 12M64 0L52 12M0 64l12-12M64 64L52 52'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Same lattice in emerald for light surfaces. */
+@utility bg-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%230b6b4f' stroke-opacity='0.07'%3E%3Crect x='18' y='18' width='28' height='28'/%3E%3Crect x='18' y='18' width='28' height='28' transform='rotate(45 32 32)'/%3E%3Ccircle cx='32' cy='32' r='6'/%3E%3Cpath d='M0 0l12 12M64 0L52 12M0 64l12-12M64 64L52 52'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility animate-rise {
+  animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes eq {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@utility animate-eq {
+  transform-origin: bottom;
+  animation: eq 0.9s ease-in-out infinite;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    /* Clears the 4rem sticky header when jumping to #ayat-N. */
+    scroll-padding-top: 5rem;
+    @media (prefers-reduced-motion: no-preference) {
+      scroll-behavior: smooth;
+    }
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button:not(:disabled),
+  a,
+  summary {
+    cursor: pointer;
+  }
+  ::selection {
+    background: rgb(11 107 79 / 0.18);
+  }
+}

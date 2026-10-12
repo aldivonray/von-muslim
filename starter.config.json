@@ -1,0 +1,7 @@
+{
+  "id": "vonmuslim",
+  "name": "VonMuslim",
+  "description": "Mengenal Islam: Al-Qur'an, jadwal shalat, doa harian, dan lainnya.",
+  "baseVersion": "0.1.0",
+  "database": "postgresql"
+}
