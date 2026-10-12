@@ -6,7 +6,10 @@ import { siteConfig } from "@/config/site";
 export function SiteFooter() {
   return (
     <footer className="surface-hero relative isolate mt-16 overflow-hidden text-white">
-      <div aria-hidden="true" className="bg-pattern-light absolute inset-0 -z-10" />
+      <div
+        aria-hidden="true"
+        className="bg-pattern-light absolute inset-0 -z-10"
+      />
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-8 md:grid-cols-[1.2fr_1fr]">
         <div className="space-y-4">
           <p className="flex items-center gap-2.5 text-lg font-bold">

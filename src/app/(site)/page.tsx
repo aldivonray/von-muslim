@@ -9,7 +9,12 @@ import { PrayerTimes } from "@/components/prayer-times";
 import { Button } from "@/components/ui/button";
 import { navItems } from "@/config/nav";
 import { ayatPilihan } from "@/data/ayat-pilihan";
-import { getAsmaulHusna, getDoaList, getSurah, getSurahList } from "@/lib/content-api";
+import {
+  getAsmaulHusna,
+  getDoaList,
+  getSurah,
+  getSurahList,
+} from "@/lib/content-api";
 import { hariIni } from "@/lib/hari-ini";
 
 export const metadata: Metadata = { title: "Beranda" };
@@ -44,9 +49,14 @@ export default async function HomePage() {
         <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
           <div className="animate-rise">
             <p className="inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-2xl bg-white/10 px-3.5 py-1.5 text-xs text-white/85 ring-1 ring-white/15 sm:rounded-full">
-              <CalendarDays className="size-3.5 text-gold-soft" aria-hidden="true" />
+              <CalendarDays
+                className="size-3.5 text-gold-soft"
+                aria-hidden="true"
+              />
               <span>{hari.masehi}</span>
-              <span aria-hidden="true" className="hidden sm:inline">·</span>
+              <span aria-hidden="true" className="hidden sm:inline">
+                ·
+              </span>
               <span>{hari.hijriah}</span>
             </p>
             <p className="mt-7 text-sm font-semibold tracking-[0.2em] text-gold-soft uppercase">
@@ -104,7 +114,11 @@ export default async function HomePage() {
       <ContinueReading surat={daftarSurat} />
 
       <section aria-labelledby="hari-ini">
-        <SectionHeading id="hari-ini" eyebrow="Renungan" title="Hari ini untukmu" />
+        <SectionHeading
+          id="hari-ini"
+          eyebrow="Renungan"
+          title="Hari ini untukmu"
+        />
         <div className="grid gap-6 lg:grid-cols-3">
           <div className="lg:col-span-2">
             {surat ? (
@@ -188,7 +202,11 @@ export default async function HomePage() {
       </section>
 
       <section aria-labelledby="jelajahi">
-        <SectionHeading id="jelajahi" eyebrow="Fitur" title="Jelajahi VonMuslim" />
+        <SectionHeading
+          id="jelajahi"
+          eyebrow="Fitur"
+          title="Jelajahi VonMuslim"
+        />
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {navItems
             .filter((item) => item.href !== "/")

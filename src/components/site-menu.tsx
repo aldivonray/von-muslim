@@ -72,7 +72,10 @@ export function MenuButton() {
         className="w-full gap-0 overflow-y-auto sm:max-w-md"
       >
         <div className="surface-hero relative isolate shrink-0 overflow-hidden px-6 pt-6 pb-7 text-white">
-          <div aria-hidden="true" className="bg-pattern-light absolute inset-0 -z-10" />
+          <div
+            aria-hidden="true"
+            className="bg-pattern-light absolute inset-0 -z-10"
+          />
           <div className="flex items-start justify-between gap-4">
             <div>
               <SheetTitle className="text-2xl font-bold text-white">
@@ -119,7 +122,9 @@ export function MenuButton() {
                       >
                         <Icon className="size-5" aria-hidden="true" />
                       </span>
-                      <span className="mt-3 text-sm font-bold">{item.label}</span>
+                      <span className="mt-3 text-sm font-bold">
+                        {item.label}
+                      </span>
                       <span className="mt-0.5 text-xs leading-5 text-muted-foreground">
                         {item.description}
                       </span>

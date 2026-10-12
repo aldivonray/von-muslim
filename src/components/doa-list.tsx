@@ -11,10 +11,7 @@ export function DoaList({ doa }: { doa: Doa[] }) {
   const searchId = useId();
   const groupId = useId();
 
-  const groups = useMemo(
-    () => [...new Set(doa.map((d) => d.grup))],
-    [doa],
-  );
+  const groups = useMemo(() => [...new Set(doa.map((d) => d.grup))], [doa]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();

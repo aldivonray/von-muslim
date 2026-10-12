@@ -71,7 +71,11 @@ export default function PengenalanPage() {
       </PageHeader>
 
       <section aria-labelledby="syahadat" className="scroll-mt-20">
-        <SectionHeading id="syahadat" eyebrow="Pintu masuk Islam" title="Syahadat" />
+        <SectionHeading
+          id="syahadat"
+          eyebrow="Pintu masuk Islam"
+          title="Syahadat"
+        />
         <div className="relative overflow-hidden rounded-[2rem] border bg-card p-6 text-center shadow-sm sm:p-12">
           <div aria-hidden="true" className="bg-pattern absolute inset-0" />
           <div className="relative">
@@ -102,7 +106,11 @@ export default function PengenalanPage() {
       </section>
 
       <section aria-labelledby="rukun-iman" className="scroll-mt-20">
-        <SectionHeading id="rukun-iman" eyebrow="Keyakinan" title="Rukun Iman" />
+        <SectionHeading
+          id="rukun-iman"
+          eyebrow="Keyakinan"
+          title="Rukun Iman"
+        />
         <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {rukunIman.map((item, index) => (
             <PokokCard key={item.judul} item={item} nomor={index + 1} />
@@ -113,7 +121,10 @@ export default function PengenalanPage() {
       <section aria-labelledby="ihsan" className="scroll-mt-20">
         <SectionHeading id="ihsan" eyebrow="Puncak kebaikan" title="Ihsan" />
         <blockquote className="surface-hero relative isolate overflow-hidden rounded-[2rem] p-8 text-white sm:p-12">
-          <div aria-hidden="true" className="bg-pattern-light absolute inset-0 -z-10" />
+          <div
+            aria-hidden="true"
+            className="bg-pattern-light absolute inset-0 -z-10"
+          />
           <Quote className="size-10 text-gold-soft" aria-hidden="true" />
           <p className="mt-4 max-w-3xl text-lg leading-8 text-pretty sm:text-xl sm:leading-9">
             {ihsan.penjelasan}

@@ -29,9 +29,7 @@ test("signup, persisted session, signout, rejected password, and signin work", a
     .getByRole("button", { name: "Create account", exact: true })
     .click();
   await expect(page).toHaveURL(/\/app$/);
-  await expect(
-    page.getByRole("heading", { name: "Akun saya" }),
-  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Akun saya" })).toBeVisible();
   await page.reload();
   await expect(page.getByText(`Masuk sebagai ${email}`)).toBeVisible();
   const cookies = await context.cookies();

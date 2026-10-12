@@ -2,7 +2,6 @@
 
 Mengenal Islam dalam Bahasa Indonesia: Al-Qur'an dengan terjemahan dan audio murottal, jadwal shalat, doa harian, Asmaul Husna, arah kiblat, dan tasbih. Data bersumber dari API publik dan tidak diketik manual.
 
-
 The PostgreSQL edition of the base starter: **Next.js, Drizzle ORM, PostgreSQL, Better Auth, Tailwind CSS, shadcn/ui, and Motion**. It includes working accounts, a blank protected app, an authenticated Notes API demonstrating the backend standard, project skills, and Context7 configuration.
 
 This is an independent starter. Use it as the foundation for your dashboard, chatbot, or another app.

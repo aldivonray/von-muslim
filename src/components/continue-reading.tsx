@@ -12,7 +12,10 @@ export function ContinueReading({
   const [progress] = useTerakhirDibaca();
   const detail = progress && surat.find((s) => s.nomor === progress.surah);
   if (!progress || !detail) return null;
-  const persen = Math.min(100, Math.round((progress.ayat / detail.jumlahAyat) * 100));
+  const persen = Math.min(
+    100,
+    Math.round((progress.ayat / detail.jumlahAyat) * 100),
+  );
 
   return (
     <Link

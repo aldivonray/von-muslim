@@ -12,7 +12,10 @@ export default async function AuthLayout({
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <aside className="surface-hero relative isolate hidden overflow-hidden p-12 text-white lg:flex lg:flex-col lg:justify-end">
-        <div aria-hidden="true" className="bg-pattern-light absolute inset-0 -z-10" />
+        <div
+          aria-hidden="true"
+          className="bg-pattern-light absolute inset-0 -z-10"
+        />
         <p className="text-xs font-semibold tracking-[0.2em] text-gold-soft uppercase">
           {siteConfig.name}
         </p>

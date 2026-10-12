@@ -66,7 +66,11 @@ function Pilihan({
 }
 
 export function TasbihCounter() {
-  const [state, setState] = useLocalStorage("vonmuslim:tasbih", DEFAULT, isTasbih);
+  const [state, setState] = useLocalStorage(
+    "vonmuslim:tasbih",
+    DEFAULT,
+    isTasbih,
+  );
   const reached = state.count > 0 && state.count % state.target === 0;
   const putaran = Math.floor(state.count / state.target);
   // A full ring at each completed round, not an empty one.
@@ -85,8 +89,19 @@ export function TasbihCounter() {
       <div className="flex flex-col items-center gap-5">
         <p className="text-lg font-semibold text-primary">{state.dzikir}</p>
         <div className="relative size-72 sm:size-80">
-          <svg viewBox="0 0 100 100" aria-hidden="true" className="absolute inset-0 -rotate-90">
-            <circle cx="50" cy="50" r="46" fill="none" stroke="var(--border)" strokeWidth="3" />
+          <svg
+            viewBox="0 0 100 100"
+            aria-hidden="true"
+            className="absolute inset-0 -rotate-90"
+          >
+            <circle
+              cx="50"
+              cy="50"
+              r="46"
+              fill="none"
+              stroke="var(--border)"
+              strokeWidth="3"
+            />
             <circle
               cx="50"
               cy="50"
@@ -106,7 +121,9 @@ export function TasbihCounter() {
             aria-label={`Tambah hitungan, saat ini ${state.count}`}
             className="surface-hero absolute inset-5 flex flex-col items-center justify-center rounded-full text-white shadow-2xl shadow-primary/30 transition-transform select-none active:scale-95 focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-ring"
           >
-            <span className="text-7xl font-bold tabular-nums">{state.count}</span>
+            <span className="text-7xl font-bold tabular-nums">
+              {state.count}
+            </span>
             <span className="mt-2 text-sm text-white/75">
               target {state.target}
               {putaran > 0 && ` · ${putaran}× selesai`}

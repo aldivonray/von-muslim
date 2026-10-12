@@ -15,7 +15,11 @@ export function NomorBadge({
         className,
       )}
     >
-      <svg viewBox="0 0 40 40" aria-hidden="true" className="absolute inset-0 size-full">
+      <svg
+        viewBox="0 0 40 40"
+        aria-hidden="true"
+        className="absolute inset-0 size-full"
+      >
         <g
           fill="currentColor"
           fillOpacity="0.08"
@@ -24,7 +28,14 @@ export function NomorBadge({
           strokeWidth="1.2"
         >
           <rect x="8" y="8" width="24" height="24" rx="2" />
-          <rect x="8" y="8" width="24" height="24" rx="2" transform="rotate(45 20 20)" />
+          <rect
+            x="8"
+            y="8"
+            width="24"
+            height="24"
+            rx="2"
+            transform="rotate(45 20 20)"
+          />
         </g>
       </svg>
       <span className="relative tabular-nums">{n}</span>

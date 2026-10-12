@@ -23,7 +23,9 @@ export default async function AppPage() {
         icon={UserRound}
         eyebrow={`Assalamu’alaikum, ${user.name}`}
         title="Akun saya"
-        description={<span className="break-all">Masuk sebagai {user.email}</span>}
+        description={
+          <span className="break-all">Masuk sebagai {user.email}</span>
+        }
       >
         <div className="mt-6">
           <SignOutButton />
@@ -33,7 +35,11 @@ export default async function AppPage() {
       <ContinueReading surat={surat} />
 
       <section aria-labelledby="penanda">
-        <SectionHeading id="penanda" eyebrow="Di perangkat ini" title="Ayat tersimpan" />
+        <SectionHeading
+          id="penanda"
+          eyebrow="Di perangkat ini"
+          title="Ayat tersimpan"
+        />
         <PenandaList surat={surat} />
       </section>
 

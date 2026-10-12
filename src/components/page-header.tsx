@@ -78,7 +78,10 @@ export function SectionHeading({
             {eyebrow}
           </p>
         )}
-        <h2 id={id} className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">
+        <h2
+          id={id}
+          className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl"
+        >
           {title}
         </h2>
       </div>

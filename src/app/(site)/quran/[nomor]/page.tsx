@@ -28,9 +28,7 @@ export default async function SurahPage({ params }: Props) {
   // Bismillah is the first ayat of Al-Fatihah, read from the API and never typed by hand.
   // Al-Fatihah (1) already contains it as ayat 1; At-Taubah (9) has none.
   const bismillah =
-    nomor === 1 || nomor === 9
-      ? null
-      : (await getSurah(1)).ayat[0].teksArab;
+    nomor === 1 || nomor === 9 ? null : (await getSurah(1)).ayat[0].teksArab;
 
   const deskripsi = stripHtml(surah.deskripsi);
 
@@ -51,7 +49,10 @@ export default async function SurahPage({ params }: Props) {
         </p>
         <ul className="mt-6 flex flex-wrap justify-center gap-2 text-sm">
           {[surah.tempatTurun, `${surah.jumlahAyat} ayat`].map((info) => (
-            <li key={info} className="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/15">
+            <li
+              key={info}
+              className="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/15"
+            >
               {info}
             </li>
           ))}

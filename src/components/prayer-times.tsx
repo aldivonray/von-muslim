@@ -29,7 +29,12 @@ type Jadwal = {
 };
 
 // Sunrise is shown for reference but is never the "next shalat".
-const WAKTU: { key: keyof Timings; nama: string; icon: LucideIcon; shalat: boolean }[] = [
+const WAKTU: {
+  key: keyof Timings;
+  nama: string;
+  icon: LucideIcon;
+  shalat: boolean;
+}[] = [
   { key: "Fajr", nama: "Subuh", icon: Sunrise, shalat: true },
   { key: "Sunrise", nama: "Terbit", icon: SunDim, shalat: false },
   { key: "Dhuhr", nama: "Dzuhur", icon: Sun, shalat: true },
@@ -126,7 +131,10 @@ export function PrayerTimes({ compact = false }: { compact?: boolean }) {
 
   const zona = data.meta.timezone;
   const now = clockHHmm(zona, clock);
-  const times = WAKTU.map((w) => ({ ...w, waktu: data.timings[w.key].slice(0, 5) }));
+  const times = WAKTU.map((w) => ({
+    ...w,
+    waktu: data.timings[w.key].slice(0, 5),
+  }));
   const shalat = times.filter((t) => t.shalat);
   // Lexicographic compare works for zero-padded HH:mm; after Isya the next is Subuh.
   const berikut = shalat.find((t) => t.waktu > now) ?? shalat[0];
@@ -195,7 +203,10 @@ export function PrayerTimes({ compact = false }: { compact?: boolean }) {
       </div>
 
       <div className="surface-hero relative isolate overflow-hidden rounded-3xl p-6 text-white sm:p-8">
-        <div aria-hidden="true" className="bg-pattern-light absolute inset-0 -z-10" />
+        <div
+          aria-hidden="true"
+          className="bg-pattern-light absolute inset-0 -z-10"
+        />
         <p className="text-xs font-semibold tracking-[0.18em] text-gold-soft uppercase">
           Menuju {berikut.nama}
         </p>
@@ -217,7 +228,8 @@ export function PrayerTimes({ compact = false }: { compact?: boolean }) {
               aria-current={next ? "true" : undefined}
               className={cn(
                 "relative rounded-2xl border bg-card p-5 transition-shadow",
-                next && "border-primary bg-primary/5 shadow-lg shadow-primary/10",
+                next &&
+                  "border-primary bg-primary/5 shadow-lg shadow-primary/10",
                 !t.shalat && "bg-muted/60",
               )}
             >

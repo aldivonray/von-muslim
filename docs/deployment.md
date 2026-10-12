@@ -39,6 +39,18 @@ Isi secret dengan `openssl rand -hex 32`. `BETTER_AUTH_URL` harus sama persis de
 
 Update rilis: `git pull && docker compose -f compose.prod.yaml up -d --build`. Migrasi berjalan otomatis sebelum app baru start. Data ada di volume `postgres-data`; jangan jalankan `down -v`. Backup: `docker compose -f compose.prod.yaml exec postgres pg_dump -U vonmuslim vonmuslim > backup.sql`.
 
+### Deploy otomatis (GitHub Actions)
+
+Setiap push ke `main`, setelah CI lulus, workflow `.github/workflows/deploy.yml` masuk ke server lewat SSH lalu menjalankan `git pull` dan `docker compose up -d --build`.
+
+Siapkan sekali:
+
+1. Di server: lakukan langkah clone dan `.env` di atas. Jika repo privat, pasang deploy key read-only agar `git pull` jalan tanpa password.
+2. Buat key khusus deploy: `ssh-keygen -t ed25519 -f deploy_key -N ""`. Tambahkan `deploy_key.pub` ke `~/.ssh/authorized_keys` di server.
+3. Di GitHub: Settings, Secrets and variables, Actions, tambah secret `SSH_HOST`, `SSH_USER`, `SSH_KEY` (isi `deploy_key`), `DEPLOY_PATH` (folder clone di server), dan opsional `SSH_PORT`.
+
+Deploy manual juga bisa dari tab Actions (Run workflow).
+
 ## Docker image
 
 `Dockerfile` builds two targets from one `next build`. The default `runner` target ships `.next/standalone`: a minimal server, the traced runtime files, and nothing else. The `migrator` target adds `drizzle-orm` and the committed SQL so a release can migrate before the new app starts.

@@ -74,8 +74,7 @@ export function QiblaCompass() {
 
   async function enableSensor() {
     const DeviceOrientation = window.DeviceOrientationEvent as unknown as
-      | OrientationPermission
-      | undefined;
+      OrientationPermission | undefined;
     if (!DeviceOrientation) {
       setSensorMsg("Perangkat ini tidak punya sensor kompas.");
       return;
@@ -102,9 +101,15 @@ export function QiblaCompass() {
   return (
     <div className="grid items-start gap-8 lg:grid-cols-[1fr_1.1fr]">
       <div className="surface-hero relative isolate mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-full p-3 shadow-2xl shadow-primary/20">
-        <div aria-hidden="true" className="bg-pattern-light absolute inset-0 -z-10" />
+        <div
+          aria-hidden="true"
+          className="bg-pattern-light absolute inset-0 -z-10"
+        />
         {state.error ? (
-          <p role="alert" className="flex h-full items-center justify-center px-10 text-center text-white/85">
+          <p
+            role="alert"
+            className="flex h-full items-center justify-center px-10 text-center text-white/85"
+          >
             Arah kiblat belum bisa dimuat. Coba lagi beberapa saat.
           </p>
         ) : loading || direction === undefined ? (
@@ -124,7 +129,11 @@ export function QiblaCompass() {
                 transition: "transform 0.2s linear",
               }}
             >
-              <circle r="114" fill="rgb(255 255 255 / 0.04)" stroke="rgb(255 255 255 / 0.18)" />
+              <circle
+                r="114"
+                fill="rgb(255 255 255 / 0.04)"
+                stroke="rgb(255 255 255 / 0.18)"
+              />
               {Array.from({ length: 72 }, (_, i) => (
                 <line
                   key={i}
@@ -158,9 +167,30 @@ export function QiblaCompass() {
                 </text>
               ))}
               <g transform={`rotate(${direction})`}>
-                <line y1="-8" y2="-66" stroke="var(--gold-soft)" strokeWidth="4" strokeLinecap="round" />
-                <rect x="-11" y="-92" width="22" height="22" rx="3" fill="#111" stroke="var(--gold-soft)" strokeWidth="1.5" />
-                <rect x="-11" y="-86" width="22" height="3.5" fill="var(--gold-soft)" />
+                <line
+                  y1="-8"
+                  y2="-66"
+                  stroke="var(--gold-soft)"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                />
+                <rect
+                  x="-11"
+                  y="-92"
+                  width="22"
+                  height="22"
+                  rx="3"
+                  fill="#111"
+                  stroke="var(--gold-soft)"
+                  strokeWidth="1.5"
+                />
+                <rect
+                  x="-11"
+                  y="-86"
+                  width="22"
+                  height="3.5"
+                  fill="var(--gold-soft)"
+                />
               </g>
               <circle r="7" fill="var(--gold-soft)" />
             </g>
@@ -184,13 +214,19 @@ export function QiblaCompass() {
               dari utara searah jarum jam · {lokasi.label}
             </p>
             {menghadap && (
-              <p role="status" className="mt-4 rounded-2xl bg-primary px-4 py-3 font-semibold text-primary-foreground">
+              <p
+                role="status"
+                className="mt-4 rounded-2xl bg-primary px-4 py-3 font-semibold text-primary-foreground"
+              >
                 Anda sudah menghadap kiblat.
               </p>
             )}
             <div className="mt-5 space-y-3">
               {!sensorOn && (
-                <Button className="h-11 rounded-full px-5" onClick={enableSensor}>
+                <Button
+                  className="h-11 rounded-full px-5"
+                  onClick={enableSensor}
+                >
                   <Compass aria-hidden="true" />
                   Aktifkan kompas perangkat
                 </Button>

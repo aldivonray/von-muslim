@@ -1,6 +1,5 @@
 "use client";
 
-
 import {
   Bookmark,
   BookmarkCheck,
@@ -87,7 +86,6 @@ const pill =
 const playerIcon =
   "flex size-9 shrink-0 items-center justify-center rounded-full text-white/85 transition-colors hover:bg-white/15 hover:text-white disabled:opacity-30";
 
-
 type Playing = { mode: "full" } | { mode: "ayat"; nomor: number } | null;
 
 export function SurahReader({
@@ -164,7 +162,6 @@ export function SurahReader({
     }
   }
 
-
   const namaQari = qariList.find((q) => q.kode === qari)?.nama;
   const nomorDiputar = playing?.mode === "ayat" ? playing.nomor : null;
 
@@ -194,7 +191,9 @@ export function SurahReader({
           <button
             type="button"
             onClick={() =>
-              playing?.mode === "full" ? togglePause() : startPlaying({ mode: "full" })
+              playing?.mode === "full"
+                ? togglePause()
+                : startPlaying({ mode: "full" })
             }
             className="group flex min-w-0 flex-1 items-center gap-3 rounded-2xl p-1 text-left focus-visible:outline-2 focus-visible:outline-ring"
           >
@@ -202,7 +201,10 @@ export function SurahReader({
               {playing?.mode === "full" && !paused ? (
                 <Pause className="size-6 fill-current" aria-hidden="true" />
               ) : (
-                <Play className="size-6 translate-x-0.5 fill-current" aria-hidden="true" />
+                <Play
+                  className="size-6 translate-x-0.5 fill-current"
+                  aria-hidden="true"
+                />
               )}
             </span>
             <span className="min-w-0">
@@ -260,7 +262,9 @@ export function SurahReader({
                 className="rounded-full"
                 aria-label="Perkecil teks Arab"
                 disabled={tampilan.ukuran === 0}
-                onClick={() => setTampilan({ ...tampilan, ukuran: tampilan.ukuran - 1 })}
+                onClick={() =>
+                  setTampilan({ ...tampilan, ukuran: tampilan.ukuran - 1 })
+                }
               >
                 <Minus aria-hidden="true" />
               </Button>
@@ -273,7 +277,9 @@ export function SurahReader({
                 className="rounded-full"
                 aria-label="Perbesar teks Arab"
                 disabled={tampilan.ukuran === UKURAN_ARAB.length - 1}
-                onClick={() => setTampilan({ ...tampilan, ukuran: tampilan.ukuran + 1 })}
+                onClick={() =>
+                  setTampilan({ ...tampilan, ukuran: tampilan.ukuran + 1 })
+                }
               >
                 <Plus aria-hidden="true" />
               </Button>
@@ -289,7 +295,9 @@ export function SurahReader({
                   <input
                     type="checkbox"
                     checked={tampilan[field]}
-                    onChange={(e) => setTampilan({ ...tampilan, [field]: e.target.checked })}
+                    onChange={(e) =>
+                      setTampilan({ ...tampilan, [field]: e.target.checked })
+                    }
                     className="size-4 accent-primary"
                   />
                   {label}
@@ -302,14 +310,23 @@ export function SurahReader({
 
       {bismillah && (
         <div className="flex items-center gap-4 py-4" aria-label="Basmalah">
-          <span aria-hidden="true" className="h-px flex-1 bg-linear-to-r from-transparent to-gold/60" />
-          <p dir="rtl" lang="ar" className="font-arabic text-center text-3xl leading-[2] text-primary sm:text-4xl">
+          <span
+            aria-hidden="true"
+            className="h-px flex-1 bg-linear-to-r from-transparent to-gold/60"
+          />
+          <p
+            dir="rtl"
+            lang="ar"
+            className="font-arabic text-center text-3xl leading-[2] text-primary sm:text-4xl"
+          >
             {bismillah}
           </p>
-          <span aria-hidden="true" className="h-px flex-1 bg-linear-to-l from-transparent to-gold/60" />
+          <span
+            aria-hidden="true"
+            className="h-px flex-1 bg-linear-to-l from-transparent to-gold/60"
+          />
         </div>
       )}
-
 
       <ol className="space-y-4">
         {ayat.map((a) => {
@@ -324,7 +341,8 @@ export function SurahReader({
               id={`ayat-${nomor}`}
               className={cn(
                 "scroll-mt-24 rounded-3xl border bg-card p-5 transition-all duration-300 sm:p-8",
-                isPlaying && "border-primary bg-primary/[0.04] ring-4 ring-primary/10",
+                isPlaying &&
+                  "border-primary bg-primary/[0.04] ring-4 ring-primary/10",
               )}
             >
               <div className="flex items-center gap-2">
@@ -339,7 +357,10 @@ export function SurahReader({
               <p
                 dir="rtl"
                 lang="ar"
-                className={cn("font-arabic mt-4 text-right", UKURAN_ARAB[tampilan.ukuran])}
+                className={cn(
+                  "font-arabic mt-4 text-right",
+                  UKURAN_ARAB[tampilan.ukuran],
+                )}
               >
                 {a.teksArab}
               </p>
@@ -358,10 +379,14 @@ export function SurahReader({
                 <button
                   type="button"
                   aria-label={
-                    isPlaying && !paused ? `Jeda ayat ${nomor}` : `Putar ayat ${nomor}`
+                    isPlaying && !paused
+                      ? `Jeda ayat ${nomor}`
+                      : `Putar ayat ${nomor}`
                   }
                   onClick={() =>
-                    isPlaying ? togglePause() : startPlaying({ mode: "ayat", nomor })
+                    isPlaying
+                      ? togglePause()
+                      : startPlaying({ mode: "ayat", nomor })
                   }
                   className={cn(
                     pill,
@@ -374,13 +399,21 @@ export function SurahReader({
                   <span
                     className={cn(
                       "flex size-7 items-center justify-center rounded-full",
-                      isPlaying ? "bg-gold-soft text-deep" : "bg-primary text-primary-foreground",
+                      isPlaying
+                        ? "bg-gold-soft text-deep"
+                        : "bg-primary text-primary-foreground",
                     )}
                   >
                     {isPlaying && !paused ? (
-                      <Pause className="size-3.5 fill-current" aria-hidden="true" />
+                      <Pause
+                        className="size-3.5 fill-current"
+                        aria-hidden="true"
+                      />
                     ) : (
-                      <Play className="size-3.5 translate-x-px fill-current" aria-hidden="true" />
+                      <Play
+                        className="size-3.5 translate-x-px fill-current"
+                        aria-hidden="true"
+                      />
                     )}
                   </span>
                   {isPlaying ? (
@@ -397,7 +430,9 @@ export function SurahReader({
                   type="button"
                   aria-pressed={bookmarked}
                   aria-label={
-                    bookmarked ? `Hapus simpanan ayat ${nomor}` : `Simpan ayat ${nomor}`
+                    bookmarked
+                      ? `Hapus simpanan ayat ${nomor}`
+                      : `Simpan ayat ${nomor}`
                   }
                   onClick={() => toggle(surah, nomor)}
                   className={cn(
@@ -454,7 +489,10 @@ export function SurahReader({
             aria-label={`Pemutar audio ${namaLatin}`}
             className="surface-hero relative isolate overflow-hidden rounded-3xl p-3 text-white shadow-2xl shadow-primary/30 ring-1 ring-white/10"
           >
-            <div aria-hidden="true" className="bg-pattern-light absolute inset-0 -z-10" />
+            <div
+              aria-hidden="true"
+              className="bg-pattern-light absolute inset-0 -z-10"
+            />
             <div className="flex items-center gap-2 sm:gap-3">
               <button
                 type="button"
@@ -463,7 +501,10 @@ export function SurahReader({
                 className="flex size-12 shrink-0 items-center justify-center rounded-full bg-gold-soft text-deep shadow-lg transition-transform hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 {paused ? (
-                  <Play className="size-5 translate-x-0.5 fill-current" aria-hidden="true" />
+                  <Play
+                    className="size-5 translate-x-0.5 fill-current"
+                    aria-hidden="true"
+                  />
                 ) : (
                   <Pause className="size-5 fill-current" aria-hidden="true" />
                 )}
@@ -474,7 +515,9 @@ export function SurahReader({
                   {nomorDiputar
                     ? `Ayat ${nomorDiputar} dari ${ayat.length}`
                     : "Surat lengkap"}
-                  <span className="truncate font-normal text-white/60">· {namaLatin}</span>
+                  <span className="truncate font-normal text-white/60">
+                    · {namaLatin}
+                  </span>
                 </p>
                 <div className="mt-1.5 flex items-center gap-2 text-[11px] text-white/70 tabular-nums">
                   <span>{waktu(posisi)}</span>
@@ -501,22 +544,37 @@ export function SurahReader({
                     className={cn(playerIcon, "hidden sm:flex")}
                     aria-label="Ayat sebelumnya"
                     disabled={nomorDiputar === 1}
-                    onClick={() => startPlaying({ mode: "ayat", nomor: nomorDiputar - 1 })}
+                    onClick={() =>
+                      startPlaying({ mode: "ayat", nomor: nomorDiputar - 1 })
+                    }
                   >
-                    <SkipBack className="size-4 fill-current" aria-hidden="true" />
+                    <SkipBack
+                      className="size-4 fill-current"
+                      aria-hidden="true"
+                    />
                   </button>
                   <button
                     type="button"
                     className={playerIcon}
                     aria-label="Ayat berikutnya"
                     disabled={nomorDiputar === ayat.length}
-                    onClick={() => startPlaying({ mode: "ayat", nomor: nomorDiputar + 1 })}
+                    onClick={() =>
+                      startPlaying({ mode: "ayat", nomor: nomorDiputar + 1 })
+                    }
                   >
-                    <SkipForward className="size-4 fill-current" aria-hidden="true" />
+                    <SkipForward
+                      className="size-4 fill-current"
+                      aria-hidden="true"
+                    />
                   </button>
                 </>
               )}
-              <button type="button" className={playerIcon} aria-label="Tutup pemutar" onClick={stop}>
+              <button
+                type="button"
+                className={playerIcon}
+                aria-label="Tutup pemutar"
+                onClick={stop}
+              >
                 <X className="size-4" aria-hidden="true" />
               </button>
             </div>

@@ -19,7 +19,11 @@ const EMPTY: AyatRef[] = [];
 
 // Stored per device. shortcut: no sync between devices, add an account-backed store if that is needed.
 export function usePenanda() {
-  const [list, setList] = useLocalStorage("vonmuslim:penanda", EMPTY, isRefList);
+  const [list, setList] = useLocalStorage(
+    "vonmuslim:penanda",
+    EMPTY,
+    isRefList,
+  );
   const has = (surah: number, ayat: number) =>
     list.some((b) => b.surah === surah && b.ayat === ayat);
   function toggle(surah: number, ayat: number) {
@@ -35,5 +39,9 @@ export function usePenanda() {
 }
 
 export function useTerakhirDibaca() {
-  return useLocalStorage<AyatRef | null>("vonmuslim:terakhir", null, isLastRead);
+  return useLocalStorage<AyatRef | null>(
+    "vonmuslim:terakhir",
+    null,
+    isLastRead,
+  );
 }
