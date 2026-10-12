@@ -1,5 +1,5 @@
-# Production stack: PostgreSQL + one-shot migration + app.
-# Copy .env.production.example to .env, fill it in, then: docker compose -f compose.prod.yaml up -d --build
+# Production stack: PostgreSQL + one-shot migration + app, written for Dokploy (Docker Compose type).
+# Set POSTGRES_PASSWORD, BETTER_AUTH_SECRET and BETTER_AUTH_URL in Dokploy's Environment tab.
 services:
   postgres:
     image: postgres:17-alpine
@@ -37,8 +37,9 @@ services:
       DATABASE_URL: postgresql://vonmuslim:${POSTGRES_PASSWORD}@postgres:5432/vonmuslim
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Set BETTER_AUTH_SECRET in .env}
       BETTER_AUTH_URL: ${BETTER_AUTH_URL:?Set BETTER_AUTH_URL in .env}
-    ports:
-      - "${APP_PORT:-3000}:3000"
+    # Internal port only. Dokploy's Traefik routes the domain to it; no host port is published.
+    expose:
+      - "3000"
     depends_on:
       migrate:
         condition: service_completed_successfully

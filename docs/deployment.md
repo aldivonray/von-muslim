@@ -25,31 +25,19 @@ npm start
 
 Apply migrations once per release. `MIGRATION_DATABASE_URL` takes precedence only for migration/Drizzle tooling; the app uses `DATABASE_URL`. Use a role with schema permissions for migrations and the permissions needed by your application at runtime. Auth migrations contain `public` tables and a Drizzle migration-history schema.
 
-## Deploy ke server (Docker Compose)
+## Deploy dengan Dokploy
 
-`compose.prod.yaml` menjalankan PostgreSQL, migrasi sekali jalan, lalu aplikasi. Di server yang sudah punya Docker:
+`compose.prod.yaml` menjalankan PostgreSQL, migrasi sekali jalan, lalu aplikasi. Dokploy membangun dan menjalankannya langsung dari GitHub.
 
-```sh
-git clone https://github.com/aldivonray/von-muslim.git && cd von-muslim
-cp .env.production.example .env   # isi POSTGRES_PASSWORD, BETTER_AUTH_SECRET, BETTER_AUTH_URL
-docker compose -f compose.prod.yaml up -d --build
-```
+1. Di Dokploy, buat **Project**, lalu **Create Service**, pilih **Compose**. Provider: **GitHub**, repo `aldivonray/von-muslim`, branch `main`, Compose Type **Docker Compose**, Compose Path `./compose.prod.yaml`.
+2. Tab **Environment**: isi `POSTGRES_PASSWORD`, `BETTER_AUTH_SECRET` (keduanya `openssl rand -hex 32`), dan `BETTER_AUTH_URL` (sama persis dengan domain, mis. `https://domain-anda.com`).
+3. Tab **Domains**: tambah domain, pilih service `app`, port `3000`, aktifkan HTTPS (Let's Encrypt). Arahkan DNS domain ke IP server Dokploy.
+4. Tab **Advanced**: aktifkan **Isolated Deployments** agar jaringan antar service terpisah dari aplikasi lain.
+5. Klik **Deploy**. Tab **General**: aktifkan **Auto Deploy** agar setiap push ke `main` memicu deploy baru.
 
-Isi secret dengan `openssl rand -hex 32`. `BETTER_AUTH_URL` harus sama persis dengan alamat yang dibuka di browser (mis. `https://domain-anda.com`). Pasang reverse proxy (Caddy atau Nginx) untuk HTTPS dan teruskan ke `APP_PORT`.
+Migrasi berjalan otomatis sebelum app baru start. Data ada di volume `postgres-data`; jangan hapus volume lewat Dokploy. Backup bisa lewat tab **Schedules** atau `pg_dump -U vonmuslim vonmuslim` di container `postgres`.
 
-Update rilis: `git pull && docker compose -f compose.prod.yaml up -d --build`. Migrasi berjalan otomatis sebelum app baru start. Data ada di volume `postgres-data`; jangan jalankan `down -v`. Backup: `docker compose -f compose.prod.yaml exec postgres pg_dump -U vonmuslim vonmuslim > backup.sql`.
-
-### Deploy otomatis (GitHub Actions)
-
-Setiap push ke `main`, setelah CI lulus, workflow `.github/workflows/deploy.yml` masuk ke server lewat SSH lalu menjalankan `git pull` dan `docker compose up -d --build`.
-
-Siapkan sekali:
-
-1. Di server: lakukan langkah clone dan `.env` di atas. Jika repo privat, pasang deploy key read-only agar `git pull` jalan tanpa password.
-2. Buat key khusus deploy: `ssh-keygen -t ed25519 -f deploy_key -N ""`. Tambahkan `deploy_key.pub` ke `~/.ssh/authorized_keys` di server.
-3. Di GitHub: Settings, Secrets and variables, Actions, tambah secret `SSH_HOST`, `SSH_USER`, `SSH_KEY` (isi `deploy_key`), `DEPLOY_PATH` (folder clone di server), dan opsional `SSH_PORT`.
-
-Deploy manual juga bisa dari tab Actions (Run workflow).
+Auto Deploy memicu deploy pada setiap push tanpa menunggu CI GitHub. Jalankan `npm run check` dan `npm run test:e2e` sebelum push ke `main`.
 
 ## Docker image
 
